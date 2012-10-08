@@ -3,6 +3,50 @@
 A full-featured markdown parser and compiler, written in javascript.
 Built for speed.
 
+## Plugins
+
+This fork adds a plugin mechanism that is just a basic implementation of the proposition made here :
+https://github.com/chjj/marked/pull/35
+
+Each plugin is identified by the special syntax : <code>[<i>pluginName</i>:<i>content</i>]</code>
+The plugin implementation must be passed as a *marked* option this way :
+
+``` js
+marked.setOptions({
+    // See below for the list of available options
+    plugins : {
+        price: function(arg) {
+            return "<span class='price'>" + arg + "</span>";
+        }
+    }
+});
+```
+
+so that the markdown example
+
+    * Silk stockings: [price:$23.00]
+    * Cotton panties: [price:$8.00]
+
+Would be converted with our additional <code>'price'</code> plugin to :
+
+    <ul>
+        <li>Silk stockings: <span class="price">$23.00</span></li>
+        <li>Cotton panties: <span class="price">$18.00</span></li>
+    </ul>
+
+*(a plugin is just a function that will return the transformed version of the intended content.)*
+
+This implementation permits the plugin to live anywhere in the markdown content, and not just as a block element (like was the case with the proposed pull request)
+
+Anyway, this implementation is just a quick and dirty workaround for a badly needed feature, but it cannot be proposed *in its current state* for different reasons :
+
+* The proposed syntax doesn't belong to any Markdown variant and as such, doesn't have any legibility.
+
+    Well, in fact, there isn't *any* proposed syntax for a generic extensions mechanism, because each extension *should* have the most intuitive and natural syntax for *its* purpose, so one syntax doesn't fit all use cases (even if it is not by far the worst proposal that could have been made).
+
+* A more complete plugin mechanism would allow each plugin to specify its own regular expression, and the way to extract parameters from the regular expression.
+
+
 ## Benchmarks
 
 node v0.4.x
