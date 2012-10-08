@@ -9,6 +9,7 @@ This fork adds a plugin mechanism that is just a basic implementation of the pro
 https://github.com/chjj/marked/pull/35
 
 Each plugin is identified by the special syntax : <code>[<i>pluginName</i>:<i>content</i>]</code>
+
 The plugin implementation must be passed as a *marked* option this way :
 
 ``` js
@@ -24,14 +25,14 @@ marked.setOptions({
 
 so that the markdown example
 
-    * Silk stockings: [price:$23.00]
-    * Cotton panties: [price:$8.00]
+    * Vintage Darth Vader figure: [price:$75.00]
+    * Star Wars Lot - 10 unopened Jar Jar Binks (*sales*): [price:$0.01]
 
 Would be converted with our additional <code>'price'</code> plugin to :
 
     <ul>
-        <li>Silk stockings: <span class="price">$23.00</span></li>
-        <li>Cotton panties: <span class="price">$18.00</span></li>
+        <li>Vintage Darth Vader figure: <span class="price">$75.00</span></li>
+        <li>Star Wars Lot - 10 unopened Jar Jar Binks (<i>sales</i>): <span class="price">$0.01</span></li>
     </ul>
 
 *(a plugin is just a function that will return the transformed version of the intended content.)*
