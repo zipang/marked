@@ -2,7 +2,7 @@
 
 var fs = require('fs')
   , path = require('path')
-  , marked = require('marked')
+  , marked = require('../lib/marked')
   , dir = __dirname + '/tests';
 
 var BREAK_ON_ERROR = false;
@@ -49,6 +49,14 @@ var main = function() {
     , file
     , text
     , html;
+
+  marked.setOptions({
+    plugins : {
+      price: function(arg) {
+        return '<span class="price">' + arg + '</span>';
+      }
+    }
+  });
 
 main:
   for (; i_ < l_; i_++) {
