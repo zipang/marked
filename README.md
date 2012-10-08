@@ -17,18 +17,18 @@ marked.setOptions({
     // See below for the list of available options
     plugins : {
         price: function(arg) {
-            return "<span class='price'>" + arg + "</span>";
+            return '<span class="price">' + arg + '</span>';
         }
     }
 });
 ```
 
-so that the markdown example
+So that this Markdown example
 
     * Vintage Darth Vader figure: [price:$75.00]
     * Star Wars Lot - 10 unopened Jar Jar Binks (*sales*): [price:$0.01]
 
-Would be converted with our additional <code>'price'</code> plugin to :
+would be converted with our additional <code>'price'</code> plugin to :
 
     <ul>
         <li>Vintage Darth Vader figure: <span class="price">$75.00</span></li>
@@ -40,8 +40,11 @@ Would be converted with our additional <code>'price'</code> plugin to :
 > IMPLEMENTATION NOTE: The plugin expression <code>[<i>pluginName</i>:<i>content</i>]</code> can be *anywhere* in the markdown text,
 > (not only as a block element like was the case with the proposed pull request).
 >
-> A single plugin detection test is made *after* all the main work has been done,
+> A single plugin detection test is made *before* entering the main lexer,
 > so that 90% of the users that don't rely on any plugin will see no slowdown at all in their output.
+>
+> When plugins are declared, each plugin runs its own global search and replace on the whole Markdown content.
+> So the more plugins you add, the more you can expect performances to drop down..
 
 Anyway, this implementation is just a quick and dirty workaround for a badly needed feature, but it cannot be proposed *in its current state* for different reasons :
 
