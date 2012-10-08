@@ -32,12 +32,12 @@ Would be converted with our additional <code>'price'</code> plugin to :
 
     <ul>
         <li>Vintage Darth Vader figure: <span class="price">$75.00</span></li>
-        <li>Star Wars Lot - 10 unopened Jar Jar Binks (<i>sales</i>): <span class="price">$0.01</span></li>
+        <li>Star Wars Lot - 10 unopened Jar Jar Binks (<em>sales</em>): <span class="price">$0.01</span></li>
     </ul>
 
 *(a plugin is just a function that will return the transformed version of the intended content.)*
 
-This implementation permits the plugin to live anywhere in the markdown content, and not just as a block element (like was the case with the proposed pull request)
+    This implementation permits the plugin to live *anywhere* in the markdown content, not just as a block element (like was the case with the proposed pull request)
 
 Anyway, this implementation is just a quick and dirty workaround for a badly needed feature, but it cannot be proposed *in its current state* for different reasons :
 
