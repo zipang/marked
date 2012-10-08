@@ -37,7 +37,11 @@ Would be converted with our additional <code>'price'</code> plugin to :
 
 *(a plugin is just a function that will return the transformed version of the intended content.)*
 
-    This implementation permits the plugin to live *anywhere* in the markdown content, not just as a block element (like was the case with the proposed pull request)
+> IMPLEMENTATION NOTE: The plugin expression <code>[<i>pluginName</i>:<i>content</i>]</code> can be *anywhere* in the markdown text,
+> (not only as a block element like was the case with the proposed pull request).
+>
+> A single plugin detection test is made *after* all the main work has been done,
+> so that 90% of the users that don't rely on any plugin will see no slowdown at all in their output.
 
 Anyway, this implementation is just a quick and dirty workaround for a badly needed feature, but it cannot be proposed *in its current state* for different reasons :
 
